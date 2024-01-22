@@ -57,7 +57,7 @@ Antes de clonar y ejecutar el proyecto, debes tener configurado lo siguiente en 
 - **Node.js:** Se requiere Node.js, preferiblemente la versión 18.x ya que es la que se utiliza en el runtime de AWS Lambda.
 - **Serverless Framework:** Debes tener el Serverless Framework instalado globalmente en tu máquina. Puedes instalarlo con `npm install -g serverless`.
 - **Prisma:** Si el proyecto usa Prisma, asegúrate de que está instalado y configurado adecuadamente en tu entorno.
-
+- **Base de datos:** Se esta usando Mysql Como base de datos relacional
 ## Configuración de AWS
 
 - **SSM Parameters:** Asegúrate de que las siguientes variables de entorno están configuradas en el AWS Systems Manager Parameter Store (SSM):
