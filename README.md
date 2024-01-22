@@ -4,7 +4,7 @@ La SWars API te permite interactuar con datos relacionados con el universo de St
 
 **Arquitectura y Patrones de Diseño**:  
 Los servicios se han implementado siguiendo una arquitectura hexagonal y los principios de Domain-Driven Design (DDD), lo que facilita una clara separación entre la lógica del negocio y las interacciones externas. Utiliza Command Query Responsibility Segregation (CQRS) para diferenciar entre las operaciones de lectura y escritura, lo que mejora la escalabilidad, trazabilidad y la capacidad de auditoría del sistema.
-
+ 
 ![Diagrama de Arquitectura](DiagramaDeArquitectura.png)
 
 #### **UI/API [Adaptadores Primarios]** - [1] 
