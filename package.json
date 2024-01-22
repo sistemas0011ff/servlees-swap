@@ -1,0 +1,32 @@
+{
+  "name": "swars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.131",
+    "@types/node": "^20.11.5",
+    "copy-webpack-plugin": "^12.0.2",
+    "prisma": "^5.8.1",
+    "serverless-offline": "^13.3.3",
+    "serverless-plugin-scripts": "^1.0.2",
+    "serverless-webpack": "^5.13.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.1",
+    "aws-serverless-express": "^3.4.0",
+    "axios": "^1.6.5",
+    "http-status": "^1.7.3",
+    "swagger-ui-express": "^5.0.0",
+    "typedi": "^0.10.0"
+  }
+}

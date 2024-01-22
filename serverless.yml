@@ -1,0 +1,84 @@
+service: my-serverless-project
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-plugin-scripts
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+  scripts:
+    hooks:
+      'before:package:initialize': npx prisma generate
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  environment:
+    DATABASE_URL: ${ssm:/swapi/dev/DATABASE_URL}
+    SWAPI_BASE_URL: ${ssm:/swapi/dev/SWAPI_BASE_URL}
+functions:
+  swaggerUI:
+    handler: src/app/handlers/swaggerUIHandler.handler
+    events:
+      - http:
+          path: /docs
+          method: get
+          cors:
+            origin: '*' # Or specify domains, e.g., 'http://example.com'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+  myFunction:
+    handler: src/app/handlers/myHandler.handler
+    events:
+      - http:
+          path: my-path
+          method: get
+  getPlanets:
+    handler: src/app/handlers/planets/getPlanets.handler
+    events:
+      - http:
+          path: planets
+          method: get
+  createPlanet:
+    handler: src/app/handlers/planets/createPlanet.handler
+    events:
+      - http:
+          path: planets
+          method: post
+  getPlanetsFromApi:
+    handler: src/app/handlers/planets/getPlanetsSWApi.handler
+    events:
+      - http:
+          path: api/planets
+          method: get
+  createPeople:
+    handler: src/app/handlers/people/createPeople.handler
+    events:
+      - http:
+          path: people
+          method: post
+
+  getPeople:
+    handler: src/app/handlers/people/getPeople.handler
+    events:
+      - http:
+          path: people
+          method: get
+
+  getPeopleFromApi:
+    handler: src/app/handlers/people/getPeopleSWApi.handler
+    events:
+      - http:
+          path: api/people
+          method: get

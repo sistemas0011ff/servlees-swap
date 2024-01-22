@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Films {
+  id            Int       @id @default(autoincrement())
+  title         String?   @db.VarChar(100)
+  episode_id    Int?
+  opening_crawl String?   @db.Text
+  director      String?   @db.VarChar(100)
+  producer      String?   @db.VarChar(100)
+  release_date  DateTime? @db.Date
+  created       DateTime? @db.DateTime(0)
+  edited        DateTime? @db.DateTime(0)
+}
+
+model People {
+  id             Int       @id @default(autoincrement())
+  name           String?   @db.VarChar(100)
+  height         String?   @db.VarChar(10)
+  mass           String?   @db.VarChar(10)
+  hair_color     String?   @db.VarChar(50)
+  skin_color     String?   @db.VarChar(50)
+  eye_color      String?   @db.VarChar(50)
+  birth_year     String?   @db.VarChar(10)
+  gender         String?   @db.VarChar(10)
+  homeworld_name String?   @db.VarChar(100)
+  created        DateTime? @db.DateTime(0)
+  edited         DateTime? @db.DateTime(0)
+}
+
+model Planets {
+  id              Int       @id @default(autoincrement())
+  name            String?   @db.VarChar(100)
+  rotation_period Int?
+  orbital_period  Int?
+  diameter        Int?
+  climate         String?   @db.VarChar(100)
+  gravity         String?   @db.VarChar(100)
+  terrain         String?   @db.VarChar(100)
+  surface_water   Int?
+  population      BigInt?
+  created         DateTime? @db.DateTime(0)
+  edited          DateTime? @db.DateTime(0)
+}
