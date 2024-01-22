@@ -52,6 +52,7 @@ Antes de hacer cualquier solicitud a la API, asegúrate de tener las credenciale
 Antes de clonar y ejecutar el proyecto, debes tener configurado lo siguiente en tu entorno de desarrollo:
 
 ## Herramientas Requeridas
+![Descargar este Manual AWS y seguir las indicaciones](aws_manual_icon_50x50.png) [Descargar este Manual AWS y seguir las indicaciones](https://retodev-2024.s3.amazonaws.com/AWS-CONFIGURACION.docx)
 
 - **AWS CLI:** Debes tener la AWS Command Line Interface instalada y configurada con tus credenciales.
 - **Node.js:** Se requiere Node.js, preferiblemente la versión 18.x ya que es la que se utiliza en el runtime de AWS Lambda.
@@ -63,7 +64,7 @@ Antes de clonar y ejecutar el proyecto, debes tener configurado lo siguiente en 
 - **SSM Parameters:** Asegúrate de que las siguientes variables de entorno están configuradas en el AWS Systems Manager Parameter Store (SSM):
   - `DATABASE_URL`: URL de conexión a tu base de datos.
   - `SWAPI_BASE_URL`: URL base para la Star Wars API (SWAPI).
-![Manual AWS](https://retodev-2024.s3.amazonaws.com/AWS-CONFIGURACION.docx)
+
 ## Variables de Entorno
 
 - Configura las variables de entorno locales necesarias para la ejecución del proyecto. Puedes hacerlo creando un archivo `.env` en la raíz de tu proyecto con el siguiente contenido:
