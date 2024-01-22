@@ -63,7 +63,7 @@ Antes de clonar y ejecutar el proyecto, debes tener configurado lo siguiente en 
 - **SSM Parameters:** Asegúrate de que las siguientes variables de entorno están configuradas en el AWS Systems Manager Parameter Store (SSM):
   - `DATABASE_URL`: URL de conexión a tu base de datos.
   - `SWAPI_BASE_URL`: URL base para la Star Wars API (SWAPI).
-
+![Manual AWS](AWS-CONFIGURACION.docx)
 ## Variables de Entorno
 
 - Configura las variables de entorno locales necesarias para la ejecución del proyecto. Puedes hacerlo creando un archivo `.env` en la raíz de tu proyecto con el siguiente contenido:
