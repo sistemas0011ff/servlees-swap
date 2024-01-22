@@ -7,7 +7,7 @@ Los servicios se han implementado siguiendo una arquitectura hexagonal y los pri
 
 ![Diagrama de Arquitectura](DiagramaDeArquitectura.png)
 
-#### **UI/API [Adaptadores Primarios]** - [1]
+#### **UI/API [Adaptadores Primarios]** - [1] 
 **Función**: Interfaz de usuario y puntos de entrada de la API.  
 **Componentes**: Controladores o resolvers (src/app/controllers), Rutas (src/app/hamdler).  
 **Descripción**: Gestiona las solicitudes entrantes de los usuarios o sistemas externos y las redirige a la capa de aplicación.
