@@ -24,8 +24,7 @@ export const handler: APIGatewayProxyHandler = async (event): Promise<APIGateway
                 person: person 
             }),
         };
-    } catch (error) {
-        console.error('Error al crear la persona:', error);
+    } catch (error) { 
         return {
             statusCode: 500,
             body: JSON.stringify({

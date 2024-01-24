@@ -12,8 +12,7 @@ export const handler: APIGatewayProxyHandler = async () => {
             statusCode: 200,
             body: JSON.stringify(peoples),
         };
-    } catch (error) {
-        console.error('Error al obtener los peoples:', error);
+    } catch (error) { 
         return {
             statusCode: 500,
             body: JSON.stringify({

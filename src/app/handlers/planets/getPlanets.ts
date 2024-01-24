@@ -10,16 +10,14 @@ export const handler: APIGatewayProxyHandler = async () => {
         const planets = await planetRegistryService.listPlanets();
 
         const planetsSafe = planets.map(planet => ({
-            ...planet,
-            population: planet.population ? planet.population.toString() : null,
+            ...planet
         }));
 
         return {
             statusCode: 200,
             body: JSON.stringify(planetsSafe),
         };
-    } catch (error) {
-        console.error('Error al obtener los planetas:', error);
+    } catch (error) { 
         return {
             statusCode: 500,
             body: JSON.stringify({

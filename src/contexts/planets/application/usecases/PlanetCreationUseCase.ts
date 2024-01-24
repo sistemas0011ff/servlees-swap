@@ -16,8 +16,7 @@ export class PlanetCreationUseCase implements IPlanetCreationUseCase {
         private commandHandler: ICommandHandler<CreatePlanetCommand, ICommandResult<boolean, PlanetCreationConfirmation>>
     ) {}
 
-    async createPlanet(data: PlanetData): Promise<Planet> {
-        console.log("ingreso al caso de uso");
+    async createPlanet(data: PlanetData): Promise<Planet> { 
         const command = new CreatePlanetCommand(data); 
         const commandResult = await this.commandHandler.handle(command);
 

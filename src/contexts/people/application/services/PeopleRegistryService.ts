@@ -1,4 +1,4 @@
-// src/application/services/PeopleRegistryService.ts
+
 import { Service } from 'typedi';
 import { IPeopleRegistryService } from '../interfaces/IPeopleRegistryService';
 import { IPeopleCreationUseCase } from '../interfaces/IPeopleCreationUseCase';

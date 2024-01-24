@@ -1,26 +1,15 @@
-import { APIGatewayProxyEvent, APIGatewayProxyHandler } from 'aws-lambda';
-
-interface ExtendedAPIGatewayProxyEventHeaders {
-    Host?: string;
-}
-
-// Extiende el evento APIGatewayProxyEvent para usar las cabeceras extendidas
-interface ExtendedAPIGatewayProxyEvent extends Omit<APIGatewayProxyEvent, 'headers'> {
-    headers: ExtendedAPIGatewayProxyEventHeaders;
-}
-
-
+import { APIGatewayProxyHandler } from 'aws-lambda';
+ 
+ 
 export const handler: APIGatewayProxyHandler = async (event) => {
     let baseUrl: string;
 
-    // Comprueba si la cabecera "Host" existe y maneja la posibilidad de mayúsculas/minúsculas
     const hostHeader = event.headers.Host || event.headers.host;
 
     if (hostHeader) {
         const isLocal = hostHeader.includes('localhost');
         baseUrl = isLocal ? `http://${hostHeader}/${event.requestContext.stage}` : `https://${hostHeader}/${event.requestContext.stage}`;
     } else {
-        // Manejar el caso en que la cabecera "Host" no esté disponible
         baseUrl = 'http://default-host';
     }
     const swaggerSpec = {
@@ -38,7 +27,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
         paths: {
             '/api/planets': {
                 get: {
-                    summary: 'Obtiene la información de un planeta específico desde SWAPI',
+                    summary: 'Obtiene la información de un planeta específico desde SWAPI (Especificar su ID Ejemplo 1)',
                     operationId: 'getPlanetById',
                     tags: [
                         'planets'
@@ -75,9 +64,66 @@ export const handler: APIGatewayProxyHandler = async (event) => {
                     }
                 }
             },
+            '/planets': {
+                post: {
+                    summary: 'Crea un nuevo planeta',
+                    tags: [
+                        'planets'
+                    ],
+                    requestBody: {
+                        required: true,
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/PlanetDataSpanishApp'
+                                }
+                            }
+                        }
+                    },
+                    responses: {
+                        '200': {
+                            description: 'Planeta creado con éxito',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        $ref: '#/components/schemas/Planet'
+                                    }
+                                }
+                            }
+                        },
+                        '400': {
+                            description: 'Datos de entrada no válidos'
+                        },
+                        '500': {
+                            description: 'Error interno del servidor'
+                        }
+                    }
+                },
+                get: {
+                    summary: 'Lista todos los planetas',
+                    tags: [
+                        'planets'
+                    ],
+                    responses: {
+                        '200': {
+                            description: 'Lista de planetas obtenida con éxito',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        type: 'array',
+                                        items: {
+                                            $ref: '#/components/schemas/Planet',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                }
+            },
             '/api/people': {
                 get: {
-                    summary: 'Obtiene la información de una persona específica por su ID',
+                    summary: 'Obtiene la información de una persona (Especificar su ID Ejemplo 1)',
                     operationId: 'getPeopleById',
                     tags: [
                         'people'
@@ -114,78 +160,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
                     }
                 }
             },
-            '/planets': {
-                get: {
-                    summary: 'Lista todos los planetas',
-                    responses: {
-                        '200': {
-                            description: 'Lista de planetas obtenida con éxito',
-                            content: {
-                                'application/json': {
-                                    schema: {
-                                        type: 'array',
-                                        items: {
-                                            $ref: '#/components/schemas/Planet',
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-                post: {
-                    summary: 'Crea un nuevo planeta',
-                    requestBody: {
-                        required: true,
-                        content: {
-                            'application/json': {
-                                schema: {
-                                    $ref: '#/components/schemas/PlanetDataSpanishApp'
-                                }
-                            }
-                        }
-                    },
-                    responses: {
-                        '200': {
-                            description: 'Planeta creado con éxito',
-                            content: {
-                                'application/json': {
-                                    schema: {
-                                        $ref: '#/components/schemas/Planet'
-                                    }
-                                }
-                            }
-                        },
-                        '400': {
-                            description: 'Datos de entrada no válidos'
-                        },
-                        '500': {
-                            description: 'Error interno del servidor'
-                        }
-                    }
-                }
-            },
             '/people': {
-                get: {
-                    summary: 'Lista todas las personas',
-                    responses: {
-                        '200': {
-                            description: 'Lista de personas obtenida con éxito',
-                            content: {
-                                'application/json': {
-                                    schema: {
-                                        type: 'array',
-                                        items: {
-                                            $ref: '#/components/schemas/People'
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 post: {
                     summary: 'Crea una nueva persona',
+                    tags: [
+                        'people'
+                    ],
                     requestBody: {
                         required: true,
                         content: {
@@ -227,6 +207,27 @@ export const handler: APIGatewayProxyHandler = async (event) => {
                         },
                         '500': {
                             description: 'Error interno del servidor'
+                        }
+                    }
+                },
+                get: {
+                    summary: 'Lista todas las personas',
+                    tags: [
+                        'people'
+                    ],
+                    responses: {
+                        '200': {
+                            description: 'Lista de personas obtenida con éxito',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        type: 'array',
+                                        items: {
+                                            $ref: '#/components/schemas/People'
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -288,7 +289,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
                         aguaSuperficial: { type: 'number' },
                         poblacion: { type: 'number' },
                     },
-                    required: ['nombre', 'clima', 'terreno'] // Ajusta según los campos obligatorios
+                    required: ['nombre', 'clima', 'terreno'] 
                 },
                 People: {
                     type: 'object',

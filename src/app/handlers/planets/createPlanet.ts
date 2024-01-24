@@ -24,8 +24,7 @@ export const handler: APIGatewayProxyHandler = async (event): Promise<APIGateway
                 planet: planet 
             }),
         };
-    } catch (error) {
-        console.error('Error al crear el planeta:', error); 
+    } catch (error) { 
         return {
             statusCode: 500,
             body: JSON.stringify({

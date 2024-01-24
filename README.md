@@ -5,7 +5,7 @@ La SWars API te permite interactuar con datos relacionados con el universo de St
 **Arquitectura y Patrones de Diseño**:  
 Los servicios se han implementado siguiendo una arquitectura hexagonal y los principios de Domain-Driven Design (DDD), lo que facilita una clara separación entre la lógica del negocio y las interacciones externas. Utiliza Command Query Responsibility Segregation (CQRS) para diferenciar entre las operaciones de lectura y escritura, lo que mejora la escalabilidad, trazabilidad y la capacidad de auditoría del sistema.
  
-![Diagrama de Arquitectura](DiagramaArquitectura.png)
+![Diagrama de Arquitectura](images/DiagramaArquitectura.png)
 
 #### **UI/API [Adaptadores Primarios]** - [1] 
 **Función**: Interfaz de usuario y puntos de entrada de la API.  
@@ -52,12 +52,12 @@ Antes de hacer cualquier solicitud a la API, asegúrate de tener las credenciale
 Antes de clonar y ejecutar el proyecto, debes tener configurado lo siguiente en tu entorno de desarrollo:
 
 ## Herramientas Requeridas
-![Descargar este Manual AWS y seguir las indicaciones](aws_manual_icon_50x50.png) [Descargar este Manual AWS y seguir las indicaciones](https://retodev-2024.s3.amazonaws.com/AWS-CONFIGURACION.docx)
+![Descargar este Manual AWS y seguir las indicaciones](images/aws_manual_icon_50x50.png) [Descargar este Manual AWS y seguir las indicaciones](https://retodev-2024.s3.amazonaws.com/AWS-CONFIGURACION.docx)
 
 - **AWS CLI:** Debes tener la AWS Command Line Interface instalada y configurada con tus credenciales.
 - **Node.js:** Se requiere Node.js, preferiblemente la versión 18.x ya que es la que se utiliza en el runtime de AWS Lambda.
 - **Serverless Framework:** Debes tener el Serverless Framework instalado globalmente en tu máquina. Puedes instalarlo con `npm install -g serverless`.
-- **Prisma:** Si el proyecto usa Prisma, asegúrate de que está instalado y configurado adecuadamente en tu entorno.
+- **Prisma:** Asegúrate de que está instalado y configurado adecuadamente en tu entorno.
 - **Base de datos:** Se esta usando Mysql Como base de datos relacional
 ## Configuración de AWS
 
@@ -70,14 +70,23 @@ Antes de clonar y ejecutar el proyecto, debes tener configurado lo siguiente en 
 - Configura las variables de entorno locales necesarias para la ejecución del proyecto. Puedes hacerlo creando un archivo `.env` en la raíz de tu proyecto con el siguiente contenido:
 
 ```plaintext
-DATABASE_URL=your_database_connection_string_here
+DATABASE_URL=mysql://admin:Inicios20222022$$$$$$@database-1.c1xep4l0kru8.us-east-1.rds.amazonaws.com/reto
 SWAPI_BASE_URL=https://swapi.py4e.com
 ```
-  
-## Uso
+  ## Uso
+
+Antes de comenzar, asegúrate de tener configuradas tus credenciales de AWS. Esto es necesario para que Serverless Framework pueda interactuar con los servicios de AWS. Sigue estos pasos si aún no lo has hecho:
+
+### Configuración de AWS
+
+1. **Instalar AWS CLI**: Asegúrate de tener el AWS Command Line Interface instalado en tu máquina.
+2. **Ejecutar AWS Configure**: En tu terminal, ejecuta `aws configure` y sigue las instrucciones para ingresar tu Access Key ID, Secret Access Key, región por defecto, y el formato de salida.
+
+Una vez configurado AWS, puedes proceder con el uso del proyecto:
+
+### Pasos para el uso del proyecto
 
 ```bash
- 
 # Clonar el repositorio
 git clone https://github.com/sistemas0011ff/servlees-swap.git
 
@@ -92,7 +101,7 @@ serverless deploy
 ```
 
 ## Endpoints de la API
-
+![Consulta Api Externa](images/swgger.png)
 ### Planetas
 
 #### Obtener un Planeta por ID
@@ -104,14 +113,14 @@ Este resultado deberá ser utilizado para crear un nuevi recurso
   - `id`: ID del planeta a recuperar.
 
 
-![Consulta Api Externa](planets-swapi-externo.png)
+![Consulta Api Externa](images/planets-swapi-externo.png)
 
 
 #### Crear un Nuevo Planeta
 
 - **Endpoint:** `POST /planets`
 - **Descripción:** Crea un nuevo registro de planeta con los datos proporcionados en el cuerpo de la solicitud de la consulta al api externa.
-![Nuevo Registro](nuevo-planeta.png)
+![Nuevo Registro](images/nuevo-planeta.png)
 
 #### Listar todos los Planetas
 
@@ -119,7 +128,7 @@ Este resultado deberá ser utilizado para crear un nuevi recurso
 - **Descripción:** Obtiene una lista de todos los planetas registrados.
 
 
-![Listar Registros](planetas-listar.png)
+![Listar Registros](images/planetas-listar.png)
 
 ### Personas
 
@@ -130,16 +139,14 @@ Este resultado deberá ser utilizado para crear un nuevi recurso
 - **Parámetros de Consulta:**
   - `id`: ID de la persona a recuperar.
 
-![Consulta Api Externa](persona-api-externa.png)
-
-
+![Consulta Api Externa](images/persona-api-externa.png)
 
 #### Crear una Nueva Persona
 
 - **Endpoint:** `POST /people`
 - **Descripción:** Crea un nuevo registro de persona con los datos proporcionados en el cuerpo de la solicitud, acá se deberá pegar el resultado de la consulta de la api externa que ya esta traducido al español sus atributos
 
-![Nuevo Registro](nueva-persona.png)
+![Nuevo Registro](images/nueva-persona.png)
 
 #### Listar todas las Personas
 
@@ -147,8 +154,44 @@ Este resultado deberá ser utilizado para crear un nuevi recurso
 - **Descripción:** Obtiene una lista de todas las personas registradas.
 
 
- ![Listar Registros](personas-listar.png)
+ ![Listar Registros](images/personas-listar.png)
 
+
+## Test
+ Teniendo en cuenta la arquitectura se hace fácil de realizar las pruebas, se muestra un resumen de los resultados de algunas pruebas, podemos enfocarnos en los componentes específicos y su respectiva cobertura, así como las implicaciones en términos de la calidad del código:
+
+### Suites y Clases Testeadas
+
+###### Manejadores de API (Handlers)
+
+- **getPeopleSWApiHandler**: Verifica las respuestas HTTP para los casos de éxito y error en la obtención de datos de personas de una API externa.
+- **createPlanetHandler**: Evalúa la creación de planetas y las respuestas HTTP adecuadas, incluyendo el manejo de errores.
+- **getPlanetsHandler**: Comprueba que se puedan obtener listas de planetas y se manejen adecuadamente los errores HTTP.
+- **getPlanetsSWApiHandler**: Confirma que se puedan obtener detalles de planetas desde una API externa y se manejen correctamente los errores.
+
+###### Servicios de Dominio (Services)
+
+- **PlanetRegistryService**: Prueba la lógica de negocio para la creación, recuperación y listado de planetas.
+- **PeopleRegistryService**: Prueba la creación de personas, el listado y la recuperación de datos desde una API.
+
+###### Casos de Uso (UseCases)
+
+- **PlanetCreationUseCase**: Valida la lógica de negocio para la creación de entidades planetarias y su persistencia.
+- **RetrievePlanetFromApiUseCase**: Evalúa la recuperación de datos de planetas desde una API externa y su transformación a la estructura de datos de la aplicación.
+- **RetrievePlanetsUseCase**: Verifica la recuperación de listas de planetas y su conformidad con las expectativas de la lógica de negocio.
+
+###### Evidencia
+ ![](images/test1.png)
+ ![](images/test2.png)
+ ![](images/test3.png)
+ ![](images/test4.png)
+ ![](images/test5.png)
+
+###### Cobertura del Código
+- **Porcentaje General de Declaraciones Cubiertas**: 76.5%.
+- **Porcentaje de Ramificaciones Cubiertas**: 78.65%.
+- **Porcentaje de Funciones Cubiertas**: 61.42%.
+- **Porcentaje de Líneas Cubiertas**: 76.5%.
 ### Autor
 
 - **Arturo Eduardo Fajardo Gutiérrez** 

@@ -25,12 +25,11 @@ export class CreatePlanetCommandHandler implements ICommandHandler<CreatePlanetC
                     responseCode: "0",
                     message: "Planet Created Successfully",
                     planetId: planetId,
-                    planet: planetData // Incluir el objeto planeta
+                    planet: planetData  
                 }
             };
         } catch (error) {
-            const message = error instanceof Error ? error.message : "Unknown error";
-            console.error("Error in CreatePlanetCommandHandler.handle(): ", message);
+            const message = error instanceof Error ? error.message : "Unknown error"; 
             return {
                 result: false,
                 value: {

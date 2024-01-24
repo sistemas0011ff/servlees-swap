@@ -1,4 +1,4 @@
-// dtos/Planet.ts
+ 
 export class Planet {
     nombre: string | null;
     periodoRotacion: number | null;
@@ -8,18 +8,17 @@ export class Planet {
     gravedad: string | null;
     terreno: string | null;
     aguaSuperficial: number | null;
-    poblacion: number | null;
-    population: any;
+    poblacion: number | null; 
   
     constructor(data: {
       nombre: string | null;
-      periodoRotacion: number | null; // Cambiamos el tipo a number | null
-      periodoOrbital: number | null; // Cambiamos el tipo a number | null
-      diametro: number | null; // Cambiamos el tipo a number | null
+      periodoRotacion: number | null;  
+      periodoOrbital: number | null;  
+      diametro: number | null; 
       clima: string | null;
       gravedad: string | null;
       terreno: string | null;
-      aguaSuperficial: number | null; // Cambiamos el tipo a number | null
+      aguaSuperficial: number | null;  
       poblacion: number | null;
     }) {
       this.nombre = data.nombre;

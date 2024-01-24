@@ -1,4 +1,4 @@
-import { Service, Inject } from "typedi";
+import { Service } from "typedi";
 import { PlanetDataEnglishApp } from "../dtos/PlanetDataEnglishApp"; 
 import { IQueryHandler } from "../../../shared/cqrs/IQueryHandler";
 import { GetPlanetQuery } from "../queries/GetPlanetQuery";
@@ -15,8 +15,7 @@ export class RetrievePlanetFromApiUseCase implements IRetrievePlanetFromApiUseCa
         try {
             const query: GetPlanetQuery = { planetId };
             const [planetEnglish] = await this.planetsQueryHandler.execute(query);
-
-            // Mapeo de PlanetDataEnglishApp a PlanetDataSpanishApp
+ 
             return new PlanetDataSpanishApp({
                 nombre: planetEnglish.name,
                 periodoRotacion: planetEnglish.rotation_period,
@@ -28,8 +27,7 @@ export class RetrievePlanetFromApiUseCase implements IRetrievePlanetFromApiUseCa
                 aguaSuperficial: planetEnglish.surface_water,
                 poblacion: planetEnglish.population,
             });
-        } catch (error) {
-            console.error('Error in RetrievePlanetFromApiUseCase:', error);
+        } catch (error) { 
             throw error;
         }
     }

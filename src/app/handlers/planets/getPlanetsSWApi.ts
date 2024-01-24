@@ -20,8 +20,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             statusCode: 200,
             body: JSON.stringify(planet),
         };
-    } catch (error) {
-        console.error('Error retrieving the planet:', error);
+    } catch (error) { 
         return {
             statusCode: 500,
             body: JSON.stringify({

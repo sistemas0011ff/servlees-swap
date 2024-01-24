@@ -14,14 +14,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
                 body: JSON.stringify({ error: 'People ID is required' }),
             };
         }
-        const People = await PeopleRegistryService.getPeopleFromApi(parseInt(PeopleId));
-console.log("cxx :: ", People);
+        const People = await PeopleRegistryService.getPeopleFromApi(parseInt(PeopleId)); 
         return {
             statusCode: 200,
             body: JSON.stringify(People),
         };
-    } catch (error) {
-        console.error('Error retrieving the People:', error);
+    } catch (error) { 
         return {
             statusCode: 500,
             body: JSON.stringify({
